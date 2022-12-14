@@ -85,7 +85,7 @@ class _studentListState extends State<studentList> {
           return ListView.builder(
             physics: NeverScrollableScrollPhysics(),
             shrinkWrap: true,
-            itemCount: storedocs!.length,
+            itemCount: storedocs.length,
             itemBuilder: (context, index) {
               return Container(
                   margin: EdgeInsets.all(8),
