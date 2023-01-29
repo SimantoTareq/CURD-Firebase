@@ -1,5 +1,6 @@
 import 'package:curd/demo/slidable.dart';
 import 'package:curd/pages/home_page.dart';
+import 'package:curd/pages/listStudent.dart';
 import 'package:curd/pages/listStudent2.dart';
 import 'package:curd/pages/studentAdd.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -31,7 +32,7 @@ class MyApp extends StatelessWidget {
                 theme: ThemeData(
                   primarySwatch: Colors.blue,
                 ),
-                home: studentAdd());
+                home: HomePage());
           }
           return CircularProgressIndicator();
         });

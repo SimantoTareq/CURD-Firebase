@@ -76,7 +76,7 @@ class _studentListState extends State<studentList> {
           }
 
           final List storedocs = [];
-          snapshot.data!.docs.map((DocumentSnapshot document) {
+          snapshot.data?.docs.map((DocumentSnapshot document) {
             Map a = document.data() as Map<String, dynamic>;
             storedocs.add(a);
             a['id'] = document.id;
