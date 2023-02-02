@@ -1,6 +1,7 @@
 import 'package:curd/pages/addStudent.dart';
 import 'package:curd/pages/listStudent.dart';
 import 'package:curd/pages/listStudent2.dart';
+import 'package:curd/pages/note_editor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
