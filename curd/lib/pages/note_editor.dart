@@ -23,11 +23,12 @@ class _noteEditorScreenState extends State<noteEditorScreen> {
 
   final titleController = TextEditingController();
   final mainlController = TextEditingController();
+  CollectionReference students =
+      FirebaseFirestore.instance.collection('students');
+
   @override
 
   //Adding Data
-  CollectionReference students =
-      FirebaseFirestore.instance.collection('students');
 
   Future<void> addUser() {
     //print('User Added');
@@ -97,16 +98,14 @@ class _noteEditorScreenState extends State<noteEditorScreen> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Appstyle.accentColor,
         onPressed: () {
-          if (_formKey.currentState!.validate()) {
-            setState(
-              () {
-                title = titleController.text;
-                note_content = mainlController.text;
+          setState(
+            () {
+              title = titleController.text;
+              note_content = mainlController.text;
 
-                addUser();
-              },
-            );
-          }
+              addUser();
+            },
+          );
         },
         child: Icon(Icons.save),
       ),

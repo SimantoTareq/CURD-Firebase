@@ -149,8 +149,9 @@ class _studentListState extends State<studentList> {
                             color: Colors.grey[300],
                           ),
                           child: ListTile(
-                            title: Text("${storedocs[index]['name']}"),
-                            subtitle: Text("${storedocs[index]['email']}"),
+                            title: Text("${storedocs[index]['title']}"),
+                            subtitle:
+                                Text("${storedocs[index]['note_content']}"),
                           ),
                         ),
                       )),

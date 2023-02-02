@@ -21,8 +21,8 @@ class _HomePageState extends State<HomePage> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Color(0xffFFB347),
         onPressed: () {
-          Navigator.of(context)
-              .push(MaterialPageRoute(builder: (builder) => AddStudentPage()));
+          Navigator.of(context).push(
+              MaterialPageRoute(builder: (builder) => noteEditorScreen()));
         },
         child: Icon(
           Icons.add,
