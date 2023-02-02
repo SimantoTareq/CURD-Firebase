@@ -15,7 +15,6 @@ class noteEditorScreen extends StatefulWidget {
 }
 
 class _noteEditorScreenState extends State<noteEditorScreen> {
-  final _formKey = GlobalKey<FormState>();
   var title = "";
   var note_content = "";
 

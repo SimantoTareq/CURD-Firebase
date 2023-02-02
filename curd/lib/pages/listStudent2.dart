@@ -1,6 +1,9 @@
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:curd/pages/note_reader.dart';
 import 'package:curd/pages/updateStudent.dart';
+import 'package:curd/style/app_style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -31,6 +34,7 @@ class _studentListState extends State<studentList> {
         .catchError((error) => print('Failed to Delete user: $error'));
   }
 
+  int color_id = Random().nextInt(Appstyle.cardsColor.length);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -143,15 +147,33 @@ class _studentListState extends State<studentList> {
                             ),
                           ],
                         ),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.grey[300],
-                          ),
-                          child: ListTile(
-                            title: Text("${storedocs[index]['title']}"),
-                            subtitle:
+                        child: Card(
+                          child: Container(
+                            padding: EdgeInsets.all(8),
+                            height: 80,
+                            width: MediaQuery.of(context).size.width * 0.95,
+                            decoration: BoxDecoration(
+                              color: Appstyle
+                                  .cardsColor[storedocs[index]['color_id']],
+                              borderRadius: BorderRadius.circular(12),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Color.fromARGB(255, 213, 213, 213)
+                                      .withOpacity(0.5),
+                                  spreadRadius: 5,
+                                  blurRadius: 7,
+                                  offset: Offset(
+                                      0, 3), // changes position of shadow
+                                ),
+                              ],
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text("${storedocs[index]['title']}"),
                                 Text("${storedocs[index]['note_content']}"),
+                              ],
+                            ),
                           ),
                         ),
                       )),

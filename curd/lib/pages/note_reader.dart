@@ -6,6 +6,7 @@ import 'package:flutter/src/widgets/framework.dart';
 
 class noteReaderScreen extends StatefulWidget {
   final String id;
+
   noteReaderScreen({super.key, required this.id});
 
   @override
@@ -13,51 +14,91 @@ class noteReaderScreen extends StatefulWidget {
 }
 
 class _noteReaderScreenState extends State<noteReaderScreen> {
-  final _formKey = GlobalKey<FormState>();
-
   //Updating Data
   CollectionReference students =
       FirebaseFirestore.instance.collection('students');
-  Future<void> updateUser(id, name, email, password) {
-    return students
-        .doc(id)
-        .update({'name': name, 'email': email, 'password': password});
+  Future<void> updateUser(
+    id,
+    title,
+    note_content,
+  ) {
+    return students.doc(id).update({
+      'title': title,
+      'note_content': note_content,
+    });
   }
 
+  String date = DateTime.now().toString();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("Update Student"),
       ),
-      body: FutureBuilder<DocumentSnapshot<Map<String, dynamic>>>(
-        future: FirebaseFirestore.instance
-            .collection('students')
-            .doc(widget.id)
-            .get(),
-        builder: (_, snapshot) {
-          if (snapshot.hasError) {
-            print('Something Went Wrong');
-          }
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-          var data = snapshot.data!.data();
-          var name = data!['name'];
-          var email = data['email'];
-          var password = data['password'];
-          return Padding(
-            padding: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
-            child: Column(
-              children: [
-                Text(name),
-              ],
-            ),
+      body: newMethod(),
+    );
+  }
+
+  FutureBuilder<DocumentSnapshot<Map<String, dynamic>>> newMethod() {
+    return FutureBuilder<DocumentSnapshot<Map<String, dynamic>>>(
+      future: FirebaseFirestore.instance
+          .collection('students')
+          .doc(widget.id)
+          .get(),
+      builder: (_, snapshot) {
+        if (snapshot.hasError) {
+          print('Something Went Wrong');
+        }
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Center(
+            child: CircularProgressIndicator(),
           );
-        },
-      ),
+        }
+        var data = snapshot.data!.data();
+        var title = data!['title'];
+        var note_content = data['note_content'];
+
+        return Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              TextFormField(
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  hintText: 'Note Title',
+                ),
+                initialValue: title,
+                autofocus: false,
+                onChanged: (value) => title = value,
+                style: Appstyle.mainTitle,
+              ),
+              SizedBox(
+                height: 8.0,
+              ),
+              Text(
+                date,
+                style: Appstyle.dateTitle,
+              ),
+              SizedBox(
+                height: 28.0,
+              ),
+              TextFormField(
+                keyboardType: TextInputType.multiline,
+                maxLines: null,
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  hintText: 'Note Content',
+                ),
+                initialValue: note_content,
+                autofocus: false,
+                onChanged: (value) => note_content = value,
+                style: Appstyle.mainContent,
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }
