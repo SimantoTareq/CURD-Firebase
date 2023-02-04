@@ -58,44 +58,65 @@ class _noteReaderScreenState extends State<noteReaderScreen> {
         var title = data!['title'];
         var note_content = data['note_content'];
 
-        return Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              TextFormField(
-                decoration: InputDecoration(
-                  border: InputBorder.none,
-                  hintText: 'Note Title',
-                ),
-                initialValue: title,
-                autofocus: false,
-                onChanged: (value) => title = value,
-                style: Appstyle.mainTitle,
+        return Container(
+          height: double.infinity,
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  TextFormField(
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintText: 'Note Title',
+                    ),
+                    initialValue: title,
+                    autofocus: false,
+                    onChanged: (value) => title = value,
+                    style: Appstyle.mainTitle,
+                  ),
+                  SizedBox(
+                    height: 8.0,
+                  ),
+                  Text(
+                    date,
+                    style: Appstyle.dateTitle,
+                  ),
+                  SizedBox(
+                    height: 28.0,
+                  ),
+                  TextFormField(
+                    keyboardType: TextInputType.multiline,
+                    maxLines: null,
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintText: 'Note Content',
+                    ),
+                    initialValue: note_content,
+                    autofocus: false,
+                    onChanged: (value) => note_content = value,
+                    style: Appstyle.mainContent,
+                  ),
+                  Align(
+                    alignment: Alignment.bottomRight,
+                    child: FloatingActionButton(
+                      onPressed: () {
+                        // Validate returns true if the form is valid, otherwise false.
+
+                        updateUser(
+                          widget.id,
+                          title,
+                          note_content,
+                        );
+                        Navigator.pop(context);
+                      },
+                      child: Icon(Icons.save),
+                    ),
+                  )
+                ],
               ),
-              SizedBox(
-                height: 8.0,
-              ),
-              Text(
-                date,
-                style: Appstyle.dateTitle,
-              ),
-              SizedBox(
-                height: 28.0,
-              ),
-              TextFormField(
-                keyboardType: TextInputType.multiline,
-                maxLines: null,
-                decoration: InputDecoration(
-                  border: InputBorder.none,
-                  hintText: 'Note Content',
-                ),
-                initialValue: note_content,
-                autofocus: false,
-                onChanged: (value) => note_content = value,
-                style: Appstyle.mainContent,
-              ),
-            ],
+            ),
           ),
         );
       },

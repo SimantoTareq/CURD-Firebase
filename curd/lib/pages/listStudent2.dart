@@ -170,8 +170,18 @@ class _studentListState extends State<studentList> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text("${storedocs[index]['title']}"),
-                                Text("${storedocs[index]['note_content']}"),
+                                Text(
+                                  "${storedocs[index]['title']}",
+                                  style: Appstyle.mainTitle,
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Text(
+                                  "${storedocs[index]['note_content']}",
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 2,
+                                ),
                               ],
                             ),
                           ),
