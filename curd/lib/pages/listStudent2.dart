@@ -98,8 +98,10 @@ class _studentListState extends State<studentList> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) =>
-                              noteReaderScreen(id: storedocs[index]['id'])),
+                          builder: (context) => noteReaderScreen(
+                                id: storedocs[index]['id'],
+                                cl_id: storedocs[index]['color_id'],
+                              )),
                     );
                   },
                   child: Container(

@@ -6,8 +6,9 @@ import 'package:flutter/src/widgets/framework.dart';
 
 class noteReaderScreen extends StatefulWidget {
   final String id;
+  final int cl_id;
 
-  noteReaderScreen({super.key, required this.id});
+  noteReaderScreen({super.key, required this.id, required this.cl_id});
 
   @override
   State<noteReaderScreen> createState() => _noteReaderScreenState();
@@ -31,9 +32,14 @@ class _noteReaderScreenState extends State<noteReaderScreen> {
   String date = DateTime.now().toString();
   @override
   Widget build(BuildContext context) {
+    int? color_id = widget.cl_id;
     return Scaffold(
+      backgroundColor: Appstyle.cardsColor[color_id],
       appBar: AppBar(
-        title: Text("Update Student"),
+        backgroundColor: Appstyle.cardsColor[color_id],
+        iconTheme: IconThemeData(color: Colors.black),
+        elevation: 0.0,
+        //title: Text("Update Student"),
       ),
       body: newMethod(),
     );
