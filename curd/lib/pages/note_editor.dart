@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:intl/intl.dart';
 
 class noteEditorScreen extends StatefulWidget {
   const noteEditorScreen({super.key});
@@ -43,7 +44,7 @@ class _noteEditorScreenState extends State<noteEditorScreen> {
   }
 
   int color_id = Random().nextInt(Appstyle.cardsColor.length);
-  String date = DateTime.now().toString();
+  DateTime date = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +76,7 @@ class _noteEditorScreenState extends State<noteEditorScreen> {
               height: 8.0,
             ),
             Text(
-              date,
+              DateFormat.yMMM().add_jm().format(date),
               style: Appstyle.dateTitle,
             ),
             SizedBox(

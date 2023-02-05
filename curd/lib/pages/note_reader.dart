@@ -3,6 +3,7 @@ import 'package:curd/style/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:intl/intl.dart';
 
 class noteReaderScreen extends StatefulWidget {
   final String id;
@@ -63,6 +64,8 @@ class _noteReaderScreenState extends State<noteReaderScreen> {
         var data = snapshot.data!.data();
         var title = data!['title'];
         var note_content = data['note_content'];
+        String create_date = data['creation_date'];
+        //  var time = DateTime('create_date');
 
         return Container(
           height: double.infinity,
@@ -86,7 +89,7 @@ class _noteReaderScreenState extends State<noteReaderScreen> {
                     height: 8.0,
                   ),
                   Text(
-                    date,
+                    create_date,
                     style: Appstyle.dateTitle,
                   ),
                   SizedBox(
