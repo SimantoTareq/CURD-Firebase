@@ -10,6 +10,8 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:curd/pages/note_reader.dart';
+import 'package:quickalert/models/quickalert_type.dart';
+import 'package:quickalert/widgets/quickalert_dialog.dart';
 
 class studentList extends StatefulWidget {
   @override
@@ -32,6 +34,18 @@ class _studentListState extends State<studentList> {
         .delete()
         .then((value) => print('User Deleted'))
         .catchError((error) => print('Failed to Delete user: $error'));
+  }
+
+  void delete() {
+    QuickAlert.show(
+      context: context,
+      type: QuickAlertType.confirm,
+      text: 'Do you want to logout',
+      confirmBtnText: 'Yes',
+      cancelBtnText: 'No',
+      confirmBtnColor: Colors.green,
+      onConfirmBtnTap: () {},
+    );
   }
 
   int color_id = Random().nextInt(Appstyle.cardsColor.length);
@@ -142,7 +156,25 @@ class _studentListState extends State<studentList> {
                               borderRadius: BorderRadius.circular(10),
                               onPressed: ((context) {
                                 //call delete
-                                daleteUser(storedocs[index]['id']);
+
+                                QuickAlert.show(
+                                  context: context,
+                                  type: QuickAlertType.confirm,
+                                  text: 'Do you want to logout',
+                                  confirmBtnText: 'Yes',
+                                  cancelBtnText: 'No',
+                                  confirmBtnColor:
+                                      Color.fromARGB(255, 206, 36, 68),
+                                  onConfirmBtnTap: () {
+                                    QuickAlert.show(
+                                      context: context,
+                                      type: QuickAlertType.confirm,
+                                      onConfirmBtnTap: () async {
+                                        daleteUser(storedocs[index]['id']);
+                                      },
+                                    );
+                                  },
+                                );
                               }),
                               backgroundColor: Colors.red,
                               icon: Icons.delete,

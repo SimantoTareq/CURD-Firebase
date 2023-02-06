@@ -64,7 +64,7 @@ class _noteReaderScreenState extends State<noteReaderScreen> {
         var data = snapshot.data!.data();
         var title = data!['title'];
         var note_content = data['note_content'];
-        String create_date = data['creation_date'];
+        DateTime create_date = data['creation_date'].toDate();
         //  var time = DateTime('create_date');
 
         return Container(
@@ -89,7 +89,7 @@ class _noteReaderScreenState extends State<noteReaderScreen> {
                     height: 8.0,
                   ),
                   Text(
-                    create_date,
+                    date,
                     style: Appstyle.dateTitle,
                   ),
                   SizedBox(
