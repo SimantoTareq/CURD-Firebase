@@ -16,6 +16,7 @@ class noteEditorScreen extends StatefulWidget {
 }
 
 class _noteEditorScreenState extends State<noteEditorScreen> {
+  final _formKey = GlobalKey<FormState>();
   var title = "";
   var note_content = "";
 
@@ -64,13 +65,23 @@ class _noteEditorScreenState extends State<noteEditorScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            TextField(
-              decoration: InputDecoration(
-                border: InputBorder.none,
-                hintText: 'Note Title',
+            Form(
+              key: _formKey,
+              child: TextFormField(
+                decoration: InputDecoration(
+                  errorStyle: TextStyle(color: Colors.red, fontSize: 15.0),
+                  border: InputBorder.none,
+                  hintText: 'Note Title',
+                ),
+                controller: titleController,
+                style: Appstyle.mainTitle,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please Enter The Title';
+                  }
+                  return null;
+                },
               ),
-              controller: titleController,
-              style: Appstyle.mainTitle,
             ),
             SizedBox(
               height: 8.0,
@@ -98,14 +109,17 @@ class _noteEditorScreenState extends State<noteEditorScreen> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Appstyle.accentColor,
         onPressed: () {
-          setState(
-            () {
-              title = titleController.text;
-              note_content = mainlController.text;
+          if (_formKey.currentState!.validate()) {
+            setState(
+              () {
+                title = titleController.text;
+                note_content = mainlController.text;
 
-              addUser();
-            },
-          );
+                addUser();
+                Navigator.of(context).pop();
+              },
+            );
+          }
         },
         child: Icon(Icons.save),
       ),

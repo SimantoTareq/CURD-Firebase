@@ -166,13 +166,11 @@ class _studentListState extends State<studentList> {
                                   confirmBtnColor:
                                       Color.fromARGB(255, 206, 36, 68),
                                   onConfirmBtnTap: () {
-                                    QuickAlert.show(
-                                      context: context,
-                                      type: QuickAlertType.confirm,
-                                      onConfirmBtnTap: () async {
-                                        daleteUser(storedocs[index]['id']);
-                                      },
-                                    );
+                                    CloseButton();
+                                    setState(() {
+                                      daleteUser(storedocs[index]['id']);
+                                    });
+                                    Navigator.of(context).pop();
                                   },
                                 );
                               }),
